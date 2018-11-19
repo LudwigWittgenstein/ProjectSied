@@ -12,15 +12,19 @@ import {
   VR
 } from 'react-360';
 import { Easing } from 'react-native';
+import Entity from 'Entity';
+import SiedView from './SiedView';
 
 export default class projectSied extends React.Component {
 
   state = {
-    bootUp: new Animated.Value(0),
+    bootUp: new Animated.Value(0), redAlert: 'transparent',
   };
 
   componentDidMount() {
     this.bootUpAnimation();
+    //console.log();
+   // this.hello();
   }
 
   bootUpAnimation() {
@@ -28,10 +32,22 @@ export default class projectSied extends React.Component {
       this.state.bootUp,
       {
         toValue: 1,
-        duration: 500,
+        duration: 1000,
         easing: Easing.ease,
+      
       }).start();
-  };
+  }
+
+  bootDownAnimation() {
+    Animated.timing(
+      this.state.bootUp,
+      {
+        toValue: 0,
+        duration: 1000,
+        easing: Easing.ease,
+      
+      }).start();
+  }
 
   // This method increments our count, triggering a re-render
   _incrementCount = () => {
@@ -39,8 +55,10 @@ export default class projectSied extends React.Component {
   };
 
   _fadeOut = () => {
-    //Environment.clearBackground();
-    console.log(this.state.bootUp);
+    Environment.clearBackground();
+    this.setState({redAlert: this.state.redAlert = 'transparent'});
+    this.bootDownAnimation();
+    //this.setState({scene: this.state.scene = true});
   };
 
 
@@ -52,21 +70,12 @@ export default class projectSied extends React.Component {
       <Animated.View  style={{
         width: 1000,
         height: 1000,
-        justifyContent: 'flex-start',
-        alignItems: 'center', 
-        opacity: this.state.bootUp}}>
-        <VrButton 
-          onClick={this._fadeOut}>
-        <Image source={asset('SiedLogo-360.png')} style={{height: 450, width: 450}} />
-        </VrButton>
-        <View style={styles.line} />
-          <View
-            style={styles.greetingBox}>
-            <Text style={styles.greeting}>
-              all worlds inside
-            </Text>
-          </View>
+        backgroundColor: this.state.redAlert,
+        justifyContent: 'center',
+        alignItems: 'center',}}>
+        
       </Animated.View>
+
     );
   }
 };
@@ -76,12 +85,10 @@ const styles = StyleSheet.create({
     // Fill the entire surface
     width: 1000,
     height: 1000,
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     alignItems: 'center',
   },
   greetingBox: {
-    padding: 20,
-    marginTop: -300,
   },
   greeting: {
     fontSize: 30,
@@ -100,3 +107,24 @@ const styles = StyleSheet.create({
 });
 
 AppRegistry.registerComponent('projectSied', () => projectSied);
+
+
+
+class Model extends React.Component {
+
+  render() {
+
+
+    return (
+      <View>
+        <Entity 
+          source={{obj: asset('./models/sied/mario.obj'), mtl: asset('./models/sied/mario.mtl')}}
+          style={{transform: [{translate: [-25, -10, -50]}]}} />
+      </View>
+    );
+  }
+}
+
+
+AppRegistry.registerComponent('Model', () => Model);
+
