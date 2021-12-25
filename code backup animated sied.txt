@@ -1,0 +1,6 @@
+/* CODE FOR ALL WORLDS INSIDE WRITING
+
+    <AnimatedEntity
+          source={{obj: asset('./models/siedContract/siedContract.obj'), mtl: asset('./models/siedContract/siedContract.mtl')}}
+          style={{transform: [{rotateX:180}, {rotateY:-200}, {rotateZ:180}, {scale:2.9}, {translateY:-25}, {translateX:-65}, {translateZ:-50}]}} />
+    */

@@ -1,14 +1,52 @@
 <html>
   <head>
     <title>projectSied</title>
-    <style>body { margin: 0; }</style>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <link rel="shortcut icon" type="image/x-icon" href="static_assets/favicon.ico">
     <link rel="apple-touch-icon" href="static_assets/favicon.ico">
+    <style>
+
+      body { margin: 0;}
+
+      #controler{
+        opacity:1;
+        transition: opacity 1s;
+      }
+    
+       .rowVisor{
+         position:absolute;
+         height:100%;
+         width:100%;
+         display:flex;
+         justify-content: center;
+         align-items:center;
+       }
+
+       #kinetix {
+          width: 200px;
+          height: 200px;
+          border-radius: 100%;
+          background: radial-gradient(#a3f9fe, transparent);
+          opacity:0;
+          transition:opacity 0.5s;
+       }
+
+       @media all and (max-width:700px) {
+         #kinetix {
+          width: 150px;
+          height: 150px;
+         }
+       }
+
+    </style>
   </head>
   <body id="body">
     <!-- Attachment point for your app -->
     <div id="container"></div>
+    <!-- Row for Control Buttons -->
+    <div class="rowVisor" id="controler">
+      <div id="kinetix"></div>
+    </div>
     <script src="./client.bundle?platform=vr"></script>
     <script>
       // Initialize the React 360 application
